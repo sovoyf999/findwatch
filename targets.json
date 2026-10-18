@@ -1,43 +1,81 @@
 [
   {
-    "id": "site-up",
-    "name": "某页面恢复可访问",
-    "type": "status",
-    "url": "https://example.com/status",
-    "match": 200,
-    "notifyOnce": true,
-    "channel": "telegram"
-  },
-  {
-    "id": "restock",
-    "name": "某商品到货",
-    "type": "contains",
-    "url": "https://example.com/product/123",
-    "match": "加入购物车",
-    "headers": { "User-Agent": "Mozilla/5.0" },
-    "notifyOnce": true
-  },
-  {
-    "id": "keyword-gone",
-    "name": "售罄字样消失",
+    "id": "cloudflare-incident",
+    "name": "Cloudflare 出现进行中故障",
     "type": "not_contains",
-    "url": "https://example.com/product/123",
-    "match": "已售罄",
-    "notifyOnce": true
-  },
-  {
-    "id": "page-change",
-    "name": "某页面内容有更新",
-    "type": "change",
-    "url": "https://example.com/news",
+    "url": "https://www.cloudflarestatus.com/api/v2/summary.json",
+    "match": "\"incidents\":[]",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept-Language": "zh-CN,zh;q=0.9"
+    },
     "notifyOnce": false
   },
   {
-    "id": "api-flag",
-    "name": "接口返回 in_stock=true",
-    "type": "json",
-    "url": "https://api.example.com/stock/123",
-    "match": { "path": "in_stock", "equals": true },
-    "notifyOnce": true
+    "id": "github-incident",
+    "name": "GitHub 出现进行中故障（会影响你的 Actions 轮询）",
+    "type": "not_contains",
+    "url": "https://www.githubstatus.com/api/v2/summary.json",
+    "match": "\"incidents\":[]",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept-Language": "zh-CN,zh;q=0.9"
+    },
+    "notifyOnce": false
+  },
+  {
+    "id": "wsl-new-release",
+    "name": "WSL 发布新版本",
+    "type": "change",
+    "url": "https://github.com/microsoft/WSL/releases.atom",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    },
+    "notifyOnce": false
+  },
+  {
+    "id": "node-new-release",
+    "name": "Node.js 发布新版本",
+    "type": "change",
+    "url": "https://github.com/nodejs/node/releases.atom",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    },
+    "notifyOnce": false
+  },
+  {
+    "id": "my-shortlink-down",
+    "name": "我的短链服务异常（首页不再正常）",
+    "type": "not_contains",
+    "url": "https://shortlink.suyufeng4399.workers.dev/",
+    "match": "Shortlink",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    },
+    "notifyOnce": false
+  },
+  {
+    "id": "v2ex-shenjia",
+    "name": "V2EX 出现「神价」相关帖",
+    "type": "contains",
+    "url": "https://www.v2ex.com/index.xml",
+    "match": "神价",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept-Language": "zh-CN,zh;q=0.9"
+    },
+    "notifyOnce": false
+  },
+  {
+    "id": "v2ex-yangmao",
+    "name": "V2EX 出现「羊毛」相关帖",
+    "type": "contains",
+    "url": "https://www.v2ex.com/index.xml",
+    "match": "羊毛",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "Accept-Language": "zh-CN,zh;q=0.9"
+    },
+    "notifyOnce": false
   }
 ]
