@@ -28,7 +28,9 @@ jobs:
 
       - name: 运行查找容器（单周期，覆盖默认 scheduler.js 为一次性 watcher.js）
         env:
-          NOTIFY_CHANNEL: ${{ secrets.NOTIFY_CHANNEL }}
+          # 默认走 ntfy（零配置推送，无需任何密钥）；要换钉钉/Server酱，只需在仓库 Secrets 设 NOTIFY_CHANNEL=dingtalk 等
+          NOTIFY_CHANNEL: ${{ secrets.NOTIFY_CHANNEL || 'ntfy' }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC || 'findwatch-sovy-4k92xf' }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
@@ -38,7 +40,7 @@ jobs:
         run: |
           docker run --rm \
             --user "$(id -u):$(id -g)" \
-            -e NOTIFY_CHANNEL -e TELEGRAM_BOT_TOKEN -e TELEGRAM_CHAT_ID \
+            -e NOTIFY_CHANNEL -e NTFY_TOPIC -e TELEGRAM_BOT_TOKEN -e TELEGRAM_CHAT_ID \
             -e DINGTALK_WEBHOOK -e DINGTALK_SECRET \
             -e NOTIFY_WEBHOOK -e SERVERCHAN_SENDKEY \
             -v "${{ github.workspace }}/state.json:/app/state.json" \

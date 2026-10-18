@@ -93,6 +93,7 @@
 
 | 渠道 | 需要的环境变量 | 适用场景 |
 |---|---|---|
+| `ntfy` | `NTFY_TOPIC` | **零配置首选**：无需注册、无需密钥。手机装 ntfy App（iOS/Android）订阅该 topic，或浏览器打开 `https://ntfy.sh/<topic>` 即可收推送 |
 | `telegram` | `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` | 全球可用；**国内需代理** |
 | `dingtalk` | `DINGTALK_WEBHOOK` + `DINGTALK_SECRET` | **国内原生可达，推荐国内用户** |
 | `webhook` | `NOTIFY_WEBHOOK` | 通用 POST JSON，兼容 ntfy / Discord / Bark 等 |

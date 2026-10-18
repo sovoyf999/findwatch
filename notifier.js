@@ -20,7 +20,8 @@ export async function notify(env, channel, title, message) {
   }
   const text = `${title}\n\n${message}`;
   try {
-    if (channel === 'telegram') await tg(env, text);
+    if (channel === 'ntfy') await ntfy(env, text);
+    else if (channel === 'telegram') await tg(env, text);
     else if (channel === 'dingtalk') await dingtalk(env, text);
     else if (channel === 'webhook') await webhook(env, text);
     else if (channel === 'serverchan') await serverchan(env, text);
@@ -29,6 +30,24 @@ export async function notify(env, channel, title, message) {
     // 通知失败必须静默：只记录，不向上抛，避免整轮查找崩溃或重复骚扰
     console.error('[notify] 发送失败(已忽略):', e.message);
   }
+}
+
+/**
+ * ntfy：零配置推送（https://ntfy.sh）。无需注册、无需密钥，
+ * 只要订阅同一个 topic 就能在手机/浏览器收到推送。
+ * 用法：NTFY_TOPIC 填一个不易被猜到的频道名，然后：
+ *   - 手机装 ntfy App（iOS App Store / Android），订阅该 topic
+ *   - 或浏览器直接打开 https://ntfy.sh/<topic> 在线收
+ */
+async function ntfy(env, text) {
+  const topic = env.NTFY_TOPIC;
+  if (!topic) throw new Error('NTFY_TOPIC 未配置');
+  const r = await fetch(`https://ntfy.sh/${encodeURIComponent(topic)}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Tags': 'bell' },
+    body: text,
+  });
+  if (!r.ok) throw new Error(`ntfy ${r.status} ${await r.text()}`);
 }
 
 async function tg(env, text) {
