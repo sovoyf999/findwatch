@@ -98,7 +98,8 @@
 | `dingtalk` | `DINGTALK_WEBHOOK` + `DINGTALK_SECRET` | **国内原生可达，推荐国内用户** |
 | `webhook` | `NOTIFY_WEBHOOK` | 通用 POST JSON，兼容 ntfy / Discord / Bark 等 |
 | `serverchan` | `SERVERCHAN_SENDKEY` | **推送到微信**（Server酱，免费额度有限） |
-| `pushplus` | `PUSHPLUS_TOKEN` | **推送到微信**（PushPlus，免费额度更大） |
+| `wxpusher` | `WXPUSHER_TOKEN` + `WXPUSHER_UID` | **微信推送首选**：免费且**无需实名认证**（wxpusher.zjiecode.com） |
+| `pushplus` | `PUSHPLUS_TOKEN` | ⚠️ PushPlus **需实名认证**才能发送（未实名返回 `code:905`），不推荐 |
 | `none` | — | 仅记录不发送（调试用） |
 
 > 国内用户优先选 `dingtalk` 或 `serverchan`；若在境外/有代理可选 `telegram`。
@@ -111,12 +112,15 @@
 2. 复制你的 `SendKey`（`SCT` 开头）
 3. 仓库 Settings → Secrets → Actions 新增 `SERVERCHAN_SENDKEY` = 这个 key
 
-**B. PushPlus（pushplus.plus，免费额度更大）**
-1. 打开 https://www.pushplus.plus/ ，微信登录
-2. 首页复制你的 `token`
-3. 仓库 Settings → Secrets → Actions 新增 `PUSHPLUS_TOKEN` = 这个 token
+**B. WxPusher（wxpusher.zjiecode.com，免费且无需实名）**
+1. 打开 https://wxpusher.zjiecode.com/ ，微信扫码登录
+2. 创建一个应用，拿到 **`appToken`**（`AT_` 开头）
+3. 扫码关注后拿到你的 **`UID`**（`UID_` 开头）
+4. Secrets 新增两项：`WXPUSHER_TOKEN` = appToken，`WXPUSHER_UID` = UID
 
-> 渠道自动优先级：显式设了 `NOTIFY_CHANNEL` 就听它的 → 否则有 Server酱 key 走微信 → 否则有 PushPlus token 走微信 → 都没有就用 ntfy（零配置）。
+> ⚠️ **PushPlus 已不推荐**：它要求实名认证才能发送消息，未实名会返回 `code:905`（实测确认）。Server酱 与 WxPusher 都**不需要实名、不收费**。
+
+> 渠道自动优先级：显式设了 `NOTIFY_CHANNEL` 就听它的 → Server酱 → WxPusher → PushPlus → 都没有则用 ntfy（零配置）。
 
 ---
 

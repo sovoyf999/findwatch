@@ -26,6 +26,7 @@ export async function notify(env, channel, title, message) {
     else if (channel === 'webhook') await webhook(env, text);
     else if (channel === 'serverchan') await serverchan(env, text);
     else if (channel === 'pushplus') await pushplus(env, text);
+    else if (channel === 'wxpusher') await wxpusher(env, text);
     else console.warn('[notify] 未知渠道:', channel);
   } catch (e) {
     // 通知失败必须静默：只记录，不向上抛，避免整轮查找崩溃或重复骚扰
@@ -122,6 +123,29 @@ async function pushplus(env, text) {
     }),
   });
   if (!r.ok) throw new Error(`pushplus ${r.status} ${await r.text()}`);
+}
+
+/**
+ * WxPusher：微信推送（https://wxpusher.zjiecode.com），免费、无需实名认证。
+ * 微信扫码关注即可拿到 appToken(AT_ 开头) 和 UID(UID_ 开头)。
+ */
+async function wxpusher(env, text) {
+  const token = env.WXPUSHER_TOKEN;
+  const uid = env.WXPUSHER_UID;
+  if (!token || !uid) throw new Error('WXPUSHER_TOKEN / WXPUSHER_UID 未配置');
+  const [title, ...rest] = text.split('\n');
+  const r = await fetch('https://wxpusher.zjiecode.com/api/send/message', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      appToken: token,
+      content: rest.join('\n') || text,
+      summary: title || 'findwatch',
+      contentType: 1,
+      uids: [uid],
+    }),
+  });
+  if (!r.ok) throw new Error(`wxpusher ${r.status} ${await r.text()}`);
 }
 
 // ---- 工具：HMAC-SHA256 + Base64（Web Crypto，Node/Workers 通用） ----
