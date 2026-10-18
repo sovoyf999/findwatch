@@ -1,0 +1,15 @@
+name = "findwatch"
+main = "src/worker.js"
+compatibility_date = "2024-09-23"
+
+# 先执行：wrangler kv namespace create WATCH_KV  得到 id 后填入下面
+kv_namespaces = [
+  { binding = "WATCH_KV", id = "REPLACE_WITH_KV_ID" }
+]
+
+# 每 5 分钟轮询一次
+crons = ["*/5 * * * *"]
+
+[vars]
+NOTIFY_CHANNEL = "telegram"
+# 其余凭据用 secret：wrangler secret put ADMIN_TOKEN / TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID ...

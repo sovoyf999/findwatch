@@ -1,0 +1,48 @@
+name: findwatch (Docker)
+
+# 在 GitHub Actions 上跑 findwatch 的 Docker 容器：
+# 每次定时触发时 docker build 并 docker run 跑一个查找周期，跑完即退出；
+# 状态通过 state.json 回写保持。公开仓库 = 无限免费分钟、在云端、不占本机。
+on:
+  schedule:
+    - cron: '*/5 * * * *'        # 每 5 分钟（GitHub Actions 最小粒度）
+  workflow_dispatch: {}
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest        # 自带 Docker
+    timeout-minutes: 10
+    permissions:
+      contents: write             # 用于 git-auto-commit 回写 state.json
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 确保 state.json 存在
+        run: test -f state.json || echo '{}' > state.json
+
+      - name: 构建 findwatch 镜像
+        run: docker build -t findwatch .
+
+      - name: 运行查找容器（单周期，覆盖默认 scheduler.js 为一次性 watcher.js）
+        env:
+          NOTIFY_CHANNEL: ${{ secrets.NOTIFY_CHANNEL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
+          NOTIFY_WEBHOOK: ${{ secrets.NOTIFY_WEBHOOK }}
+          SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
+        run: |
+          docker run --rm \
+            -e NOTIFY_CHANNEL -e TELEGRAM_BOT_TOKEN -e TELEGRAM_CHAT_ID \
+            -e DINGTALK_WEBHOOK -e DINGTALK_SECRET \
+            -e NOTIFY_WEBHOOK -e SERVERCHAN_SENDKEY \
+            -v "${{ github.workspace }}/state.json:/app/state.json" \
+            -v "${{ github.workspace }}/targets.json:/app/targets.json" \
+            findwatch node watcher.js
+
+      - name: 回写状态
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: 更新监视状态 [skip ci]'
+          file_pattern: 'state.json'

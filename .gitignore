@@ -1,0 +1,3 @@
+node_modules/
+.env
+# state.json 需随仓库提交以在 Actions 间持久化，不忽略

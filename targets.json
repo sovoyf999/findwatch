@@ -1,0 +1,43 @@
+[
+  {
+    "id": "site-up",
+    "name": "某页面恢复可访问",
+    "type": "status",
+    "url": "https://example.com/status",
+    "match": 200,
+    "notifyOnce": true,
+    "channel": "telegram"
+  },
+  {
+    "id": "restock",
+    "name": "某商品到货",
+    "type": "contains",
+    "url": "https://example.com/product/123",
+    "match": "加入购物车",
+    "headers": { "User-Agent": "Mozilla/5.0" },
+    "notifyOnce": true
+  },
+  {
+    "id": "keyword-gone",
+    "name": "售罄字样消失",
+    "type": "not_contains",
+    "url": "https://example.com/product/123",
+    "match": "已售罄",
+    "notifyOnce": true
+  },
+  {
+    "id": "page-change",
+    "name": "某页面内容有更新",
+    "type": "change",
+    "url": "https://example.com/news",
+    "notifyOnce": false
+  },
+  {
+    "id": "api-flag",
+    "name": "接口返回 in_stock=true",
+    "type": "json",
+    "url": "https://api.example.com/stock/123",
+    "match": { "path": "in_stock", "equals": true },
+    "notifyOnce": true
+  }
+]

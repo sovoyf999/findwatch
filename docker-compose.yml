@@ -1,0 +1,20 @@
+services:
+  findwatch:
+    build: .
+    image: findwatch:latest
+    restart: unless-stopped
+    environment:
+      INTERVAL_MINUTES: 5
+      NOTIFY_CHANNEL: ${NOTIFY_CHANNEL:-none}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
+      DINGTALK_WEBHOOK: ${DINGTALK_WEBHOOK:-}
+      DINGTALK_SECRET: ${DINGTALK_SECRET:-}
+      NOTIFY_WEBHOOK: ${NOTIFY_WEBHOOK:-}
+      SERVERCHAN_SENDKEY: ${SERVERCHAN_SENDKEY:-}
+    volumes:
+      # 持久化状态，避免容器重启后把已通知目标又通知一遍
+      - ./state.json:/app/state.json
+      # 挂载目标配置（直接改仓库内 targets.json 后重启容器即可生效）
+      - ./targets.json:/app/targets.json
+    # 可选：国内拉取 node:20-alpine 慢时，可在 daemon.json 配置镜像加速

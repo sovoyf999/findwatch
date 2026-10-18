@@ -1,0 +1,12 @@
+{
+  "name": "findwatch",
+  "version": "1.0.0",
+  "description": "7x24 免费持续查找监视器：找到目标主动通知，未找到保持静默",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node watcher.js",
+    "once": "node watcher.js --once"
+  }
+}
