@@ -1,1 +1,51 @@
-{}
+{
+  "cloudflare-incident": {
+    "found": true,
+    "fingerprint": "d12a11728804afc68d626ec5f83a3de2269198ffda1716512958078371d6ed67",
+    "lastStatus": 200,
+    "lastChecked": "2026-10-18T20:09:39.869Z",
+    "detail": "已不含 \"\"incidents\":[]\""
+  },
+  "github-incident": {
+    "found": false,
+    "fingerprint": "fd4e8acc0ee3f0170f66d19d03a84a88e075a56543fb4600b91bdc7439ee8126",
+    "lastStatus": 200,
+    "lastChecked": "2026-10-18T20:09:39.492Z",
+    "detail": "仍包含 \"\"incidents\":[]\""
+  },
+  "wsl-new-release": {
+    "found": false,
+    "fingerprint": "0c43b4d4d6fb2a22eb3e31febf536b97b48886803c7de5ec9e011303524b7d50",
+    "lastStatus": 200,
+    "lastChecked": "2026-10-18T20:09:40.572Z",
+    "detail": "已建立基线"
+  },
+  "node-new-release": {
+    "found": false,
+    "fingerprint": "5185db833dac886e1e6dad0fbb6bf2b72ac96172617df57800e73ada6eb6d37b",
+    "lastStatus": 200,
+    "lastChecked": "2026-10-18T20:09:40.882Z",
+    "detail": "已建立基线"
+  },
+  "my-shortlink-down": {
+    "found": false,
+    "fingerprint": "1cf3695fe7e93bd7c0240ccb7e1442a39e18928f9d50ee9b710b957862ef48d2",
+    "lastStatus": 200,
+    "lastChecked": "2026-10-18T20:09:39.674Z",
+    "detail": "仍包含 \"Shortlink\""
+  },
+  "v2ex-shenjia": {
+    "found": false,
+    "fingerprint": "6f12056946f83743da26d524d49576b2a753cc3d56bf4c2dff4c499b1024da7e",
+    "lastStatus": 200,
+    "lastChecked": "2026-10-18T20:09:41.014Z",
+    "detail": "未包含 \"神价\" (长度 55187)"
+  },
+  "v2ex-yangmao": {
+    "found": true,
+    "fingerprint": "6f12056946f83743da26d524d49576b2a753cc3d56bf4c2dff4c499b1024da7e",
+    "lastStatus": 200,
+    "lastChecked": "2026-10-18T20:09:41.065Z",
+    "detail": "包含 \"羊毛\""
+  }
+}
