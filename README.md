@@ -97,10 +97,26 @@
 | `telegram` | `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` | 全球可用；**国内需代理** |
 | `dingtalk` | `DINGTALK_WEBHOOK` + `DINGTALK_SECRET` | **国内原生可达，推荐国内用户** |
 | `webhook` | `NOTIFY_WEBHOOK` | 通用 POST JSON，兼容 ntfy / Discord / Bark 等 |
-| `serverchan` | `SERVERCHAN_SENDKEY` | 推送到微信（免费额度有限） |
+| `serverchan` | `SERVERCHAN_SENDKEY` | **推送到微信**（Server酱，免费额度有限） |
+| `pushplus` | `PUSHPLUS_TOKEN` | **推送到微信**（PushPlus，免费额度更大） |
 | `none` | — | 仅记录不发送（调试用） |
 
 > 国内用户优先选 `dingtalk` 或 `serverchan`；若在境外/有代理可选 `telegram`。
+
+### 微信推送怎么配（最常用）
+两个服务二选一，**都只要一个密钥，填完下一轮自动生效，不用改任何代码**：
+
+**A. Server酱（sct.ftqq.com）**
+1. 打开 https://sct.ftqq.com/ ，微信扫码登录
+2. 复制你的 `SendKey`（`SCT` 开头）
+3. 仓库 Settings → Secrets → Actions 新增 `SERVERCHAN_SENDKEY` = 这个 key
+
+**B. PushPlus（pushplus.plus，免费额度更大）**
+1. 打开 https://www.pushplus.plus/ ，微信登录
+2. 首页复制你的 `token`
+3. 仓库 Settings → Secrets → Actions 新增 `PUSHPLUS_TOKEN` = 这个 token
+
+> 渠道自动优先级：显式设了 `NOTIFY_CHANNEL` 就听它的 → 否则有 Server酱 key 走微信 → 否则有 PushPlus token 走微信 → 都没有就用 ntfy（零配置）。
 
 ---
 

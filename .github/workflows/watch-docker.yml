@@ -28,9 +28,10 @@ jobs:
 
       - name: 运行查找容器（单周期，覆盖默认 scheduler.js 为一次性 watcher.js）
         env:
-          # 默认走 ntfy（零配置推送，无需任何密钥）；要换钉钉/Server酱，只需在仓库 Secrets 设 NOTIFY_CHANNEL=dingtalk 等
-          NOTIFY_CHANNEL: ${{ secrets.NOTIFY_CHANNEL || 'ntfy' }}
+          # 渠道自动选择：显式 NOTIFY_CHANNEL > 有 Server酱 key（微信）> 有 PushPlus token（微信）> 默认 ntfy（零配置）
+          NOTIFY_CHANNEL: ${{ secrets.NOTIFY_CHANNEL || (secrets.SERVERCHAN_SENDKEY && 'serverchan') || (secrets.PUSHPLUS_TOKEN && 'pushplus') || 'ntfy' }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC || 'findwatch-sovy-4k92xf' }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
@@ -42,7 +43,7 @@ jobs:
             --user "$(id -u):$(id -g)" \
             -e NOTIFY_CHANNEL -e NTFY_TOPIC -e TELEGRAM_BOT_TOKEN -e TELEGRAM_CHAT_ID \
             -e DINGTALK_WEBHOOK -e DINGTALK_SECRET \
-            -e NOTIFY_WEBHOOK -e SERVERCHAN_SENDKEY \
+            -e NOTIFY_WEBHOOK -e SERVERCHAN_SENDKEY -e PUSHPLUS_TOKEN \
             -v "${{ github.workspace }}/state.json:/app/state.json" \
             -v "${{ github.workspace }}/targets.json:/app/targets.json" \
             findwatch node watcher.js

@@ -25,6 +25,7 @@ export async function notify(env, channel, title, message) {
     else if (channel === 'dingtalk') await dingtalk(env, text);
     else if (channel === 'webhook') await webhook(env, text);
     else if (channel === 'serverchan') await serverchan(env, text);
+    else if (channel === 'pushplus') await pushplus(env, text);
     else console.warn('[notify] 未知渠道:', channel);
   } catch (e) {
     // 通知失败必须静默：只记录，不向上抛，避免整轮查找崩溃或重复骚扰
@@ -100,6 +101,27 @@ async function serverchan(env, text) {
     body: new URLSearchParams({ title: title || 'findwatch', desp: rest.join('\n') }).toString(),
   });
   if (!r.ok) throw new Error(`serverchan ${r.status}`);
+}
+
+/**
+ * PushPlus：另一个微信推送服务（https://www.pushplus.plus），免费额度比 Server酱更大。
+ * 微信登录 pushplus.plus 即可拿到 token，无需服务器。
+ */
+async function pushplus(env, text) {
+  const token = env.PUSHPLUS_TOKEN;
+  if (!token) throw new Error('PUSHPLUS_TOKEN 未配置');
+  const [title, ...rest] = text.split('\n');
+  const r = await fetch('https://www.pushplus.plus/send', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      token,
+      title: title || 'findwatch',
+      content: rest.join('\n'),
+      template: 'txt',
+    }),
+  });
+  if (!r.ok) throw new Error(`pushplus ${r.status} ${await r.text()}`);
 }
 
 // ---- 工具：HMAC-SHA256 + Base64（Web Crypto，Node/Workers 通用） ----
