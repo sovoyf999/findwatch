@@ -17,8 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 确保 state.json 存在
-        run: test -f state.json || echo '{}' > state.json
+      - name: 确保 state.json 存在且容器可写
+        # 容器以非 root 用户运行；挂载的宿主机 state.json 需放开写权限，否则回写状态会 EACCES 导致任务失败
+        run: |
+          test -f state.json || echo '{}' > state.json
+          chmod 666 state.json
 
       - name: 构建 findwatch 镜像
         run: docker build -t findwatch .
@@ -34,6 +37,7 @@ jobs:
           SERVERCHAN_SENDKEY: ${{ secrets.SERVERCHAN_SENDKEY }}
         run: |
           docker run --rm \
+            --user "$(id -u):$(id -g)" \
             -e NOTIFY_CHANNEL -e TELEGRAM_BOT_TOKEN -e TELEGRAM_CHAT_ID \
             -e DINGTALK_WEBHOOK -e DINGTALK_SECRET \
             -e NOTIFY_WEBHOOK -e SERVERCHAN_SENDKEY \
