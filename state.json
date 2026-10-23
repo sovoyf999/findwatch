@@ -1,51 +1,51 @@
 {
   "cloudflare-incident": {
-    "found": true,
-    "fingerprint": "09e62f9bf09089ee50782a78e39d4270a6c28c2a5480b15a6bf928b083885a9c",
+    "found": false,
+    "fingerprint": "07f3787f5a8f300c2df2850fa6a4a1a17269415eabe7b691372ee8e99a59facb",
     "lastStatus": 200,
-    "lastChecked": "2026-10-22T23:33:57.695Z",
-    "detail": "已不含 \"\"incidents\":[]\""
+    "lastChecked": "2026-10-23T01:51:06.944Z",
+    "detail": "仍包含 \"\"incidents\":[]\""
   },
   "github-incident": {
     "found": true,
-    "fingerprint": "806d365ead286babb3bf8428e81e873487680dbcbd6867cedd710e6977096875",
+    "fingerprint": "2ca3e1607c0b1301a4975dfd5e3fe254063274b69ca7a9e5cbef5727504330a3",
     "lastStatus": 200,
-    "lastChecked": "2026-10-22T23:33:57.583Z",
+    "lastChecked": "2026-10-23T01:51:06.857Z",
     "detail": "已不含 \"\"incidents\":[]\""
   },
   "wsl-new-release": {
     "found": false,
     "fingerprint": "25da3ca54006897ee0af5016cfdb328a4d23d19022cdb268181ea199c8463eb3",
     "lastStatus": 200,
-    "lastChecked": "2026-10-22T23:33:58.364Z",
+    "lastChecked": "2026-10-23T01:51:07.292Z",
     "detail": "内容未变"
   },
   "node-new-release": {
     "found": false,
     "fingerprint": "3a70f1fcf91e85d0c4240b3e7158dd620b05bcc26a17dd428a596f428a0ecbbd",
     "lastStatus": 200,
-    "lastChecked": "2026-10-22T23:33:58.786Z",
+    "lastChecked": "2026-10-23T01:51:07.869Z",
     "detail": "内容未变"
   },
   "my-shortlink-down": {
     "found": false,
     "fingerprint": "1cf3695fe7e93bd7c0240ccb7e1442a39e18928f9d50ee9b710b957862ef48d2",
     "lastStatus": 200,
-    "lastChecked": "2026-10-22T23:33:57.793Z",
+    "lastChecked": "2026-10-23T01:51:06.915Z",
     "detail": "仍包含 \"Shortlink\""
   },
   "v2ex-shenjia": {
     "found": false,
-    "fingerprint": "03ba0cfb0bc3d339e9236d4ea7998e9963a51c3aae3f6e4c73db8d60d9f49c99",
+    "fingerprint": "6070c3df1e6ddb3be951d79752ffdd249e8cc33ecc8b2ab4cb99351b37b257fa",
     "lastStatus": 200,
-    "lastChecked": "2026-10-22T23:33:58.973Z",
-    "detail": "未包含 \"神价\" (长度 71916)"
+    "lastChecked": "2026-10-23T01:51:08.031Z",
+    "detail": "未包含 \"神价\" (长度 56706)"
   },
   "v2ex-yangmao": {
-    "found": true,
-    "fingerprint": "03ba0cfb0bc3d339e9236d4ea7998e9963a51c3aae3f6e4c73db8d60d9f49c99",
+    "found": false,
+    "fingerprint": "6070c3df1e6ddb3be951d79752ffdd249e8cc33ecc8b2ab4cb99351b37b257fa",
     "lastStatus": 200,
-    "lastChecked": "2026-10-22T23:33:58.976Z",
-    "detail": "包含 \"羊毛\""
+    "lastChecked": "2026-10-23T01:51:08.030Z",
+    "detail": "未包含 \"羊毛\" (长度 56706)"
   }
 }
