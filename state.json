@@ -1,51 +1,51 @@
 {
   "cloudflare-incident": {
     "found": false,
-    "fingerprint": "600c0d048ee6603f960b9ffb9e3209471d83f66d48ada7556501b1a2e1a77142",
+    "fingerprint": "f3900d17f3ff512fd131d7d52e972e809e3beeb1b1d5ec58dbaf6b7ac0f011e7",
     "lastStatus": 200,
-    "lastChecked": "2026-10-25T21:39:24.640Z",
+    "lastChecked": "2026-10-25T23:31:46.826Z",
     "detail": "仍包含 \"\"incidents\":[]\""
   },
   "github-incident": {
     "found": false,
     "fingerprint": "7b3c18fcf978ff2a2af8a945931ede827ed907db795bcaa6bcd2eec9028e1802",
     "lastStatus": 200,
-    "lastChecked": "2026-10-25T21:39:24.587Z",
+    "lastChecked": "2026-10-25T23:31:46.782Z",
     "detail": "仍包含 \"\"incidents\":[]\""
   },
   "wsl-new-release": {
     "found": false,
     "fingerprint": "25da3ca54006897ee0af5016cfdb328a4d23d19022cdb268181ea199c8463eb3",
     "lastStatus": 200,
-    "lastChecked": "2026-10-25T21:39:25.435Z",
+    "lastChecked": "2026-10-25T23:31:47.347Z",
     "detail": "内容未变"
   },
   "node-new-release": {
     "found": false,
     "fingerprint": "60c0aa7525166cd8815408d8316386be436d98ed5130372ad8c6962f5ef3dc44",
     "lastStatus": 200,
-    "lastChecked": "2026-10-25T21:39:26.018Z",
+    "lastChecked": "2026-10-25T23:31:47.967Z",
     "detail": "内容未变"
   },
   "my-shortlink-down": {
     "found": false,
     "fingerprint": "1cf3695fe7e93bd7c0240ccb7e1442a39e18928f9d50ee9b710b957862ef48d2",
     "lastStatus": 200,
-    "lastChecked": "2026-10-25T21:39:24.673Z",
+    "lastChecked": "2026-10-25T23:31:46.835Z",
     "detail": "仍包含 \"Shortlink\""
   },
   "v2ex-shenjia": {
     "found": false,
-    "fingerprint": "8256cbaa2ef5a360f7933788c1758ec221fe39e7156eff44a8c448fa2e4091db",
+    "fingerprint": "13055ba3df4135d89adbbdd8fef2d2f105e7015916d0f0e3e0b57eb0f3826283",
     "lastStatus": 200,
-    "lastChecked": "2026-10-25T21:39:26.185Z",
-    "detail": "未包含 \"神价\" (长度 59137)"
+    "lastChecked": "2026-10-25T23:31:48.030Z",
+    "detail": "未包含 \"神价\" (长度 56817)"
   },
   "v2ex-yangmao": {
     "found": false,
-    "fingerprint": "8256cbaa2ef5a360f7933788c1758ec221fe39e7156eff44a8c448fa2e4091db",
+    "fingerprint": "13055ba3df4135d89adbbdd8fef2d2f105e7015916d0f0e3e0b57eb0f3826283",
     "lastStatus": 200,
-    "lastChecked": "2026-10-25T21:39:26.194Z",
-    "detail": "未包含 \"羊毛\" (长度 59137)"
+    "lastChecked": "2026-10-25T23:31:48.068Z",
+    "detail": "未包含 \"羊毛\" (长度 56817)"
   }
 }
